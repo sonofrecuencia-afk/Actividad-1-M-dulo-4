@@ -1,0 +1,1434 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pausa, observa y elige · Módulo 4 · Clase 1 · UMCE-SENADIS</title>
+<meta name="description" content="Actividad interactiva Clase 1, Módulo 4: exploración guiada de cuatro estrategias de mindfulness.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+/* =========================================================
+   PALETA · coherente con Módulo 3 (índigo + teal), modernizada
+   Contrastes verificados (WCAG AA/AAA) sobre fondo blanco.
+   ========================================================= */
+:root{
+  --ink:#0f172a;            /* texto principal  (17:1) */
+  --ink-2:#334155;          /* texto secundario (10:1) */
+  --muted:#475569;          /* texto de apoyo   (7.5:1) */
+  --indigo-950:#1e1b4b;
+  --indigo-900:#312e81;
+  --indigo-800:#3730a3;     /* botones / acentos (10:1) */
+  --indigo-600:#4f46e5;
+  --indigo-100:#e0e7ff;
+  --indigo-50:#eef2ff;
+  --teal-800:#115e59;       /* texto teal (7.6:1) */
+  --teal-700:#0f766e;       /* acento teal (5.5:1) */
+  --teal-100:#ccfbf1;
+  --teal-50:#f0fdfa;
+  --green-800:#166534; --green-50:#f0fdf4; --green-200:#bbf7d0;
+  --amber-800:#92400e; --amber-50:#fffbeb; --amber-200:#fde68a;
+  --bg:#f4f6fb;
+  --card:#ffffff;
+  --border:#cbd5e1;
+  --border-soft:#e2e8f0;
+  --focus:#f59e0b;
+  --radius-lg:24px; --radius:16px; --radius-sm:12px;
+  --shadow:0 10px 30px rgba(15,23,42,.08);
+  --shadow-sm:0 2px 8px rgba(15,23,42,.06);
+  --font:'Plus Jakarta Sans','Segoe UI',Arial,Helvetica,Verdana,sans-serif;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0;font-family:var(--font);font-size:1.0625rem;line-height:1.6;
+  color:var(--ink);background:var(--bg);min-height:100%;
+}
+img,svg{max-width:100%}
+button,input,textarea{font:inherit;color:inherit}
+p{margin:0 0 .85rem}
+p:last-child{margin-bottom:0}
+h1,h2,h3,h4{line-height:1.25;margin:0 0 .6rem;color:var(--indigo-950)}
+[hidden]{display:none!important}
+.sr-only{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+:focus-visible{outline:3px solid var(--focus);outline-offset:3px;border-radius:6px}
+[tabindex="-1"]:focus{outline:none}
+
+/* ---------- ESTRUCTURA ---------- */
+.app{max-width:940px;margin:0 auto;padding:clamp(10px,2.5vw,24px);display:flex;flex-direction:column;gap:14px}
+
+.topbar{
+  display:flex;align-items:center;justify-content:space-between;gap:12px;
+  background:var(--card);border-radius:var(--radius);padding:10px 14px 10px 12px;
+  box-shadow:var(--shadow-sm);border-bottom:4px solid var(--indigo-800);
+}
+.brand{display:flex;align-items:center;gap:10px;min-width:0}
+.brand-mark{width:40px;height:40px;flex-shrink:0}
+.brand-text{min-width:0}
+.eyebrow{margin:0;font-size:.78rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--teal-800)}
+.brand-title{margin:0;font-size:1.02rem;font-weight:800;color:var(--indigo-950);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.icon-btn{
+  display:inline-flex;align-items:center;gap:6px;min-height:44px;padding:0 14px;border-radius:999px;
+  border:2px solid var(--border);background:#fff;font-weight:700;font-size:.9rem;color:var(--indigo-900);cursor:pointer;flex-shrink:0
+}
+.icon-btn:hover{border-color:var(--indigo-800);background:var(--indigo-50)}
+.icon-btn svg{width:20px;height:20px}
+.icon-btn .lbl{display:inline}
+
+/* ---------- PROGRESO ---------- */
+.progress{background:var(--card);border-radius:var(--radius);padding:12px 16px 14px;box-shadow:var(--shadow-sm)}
+.progress-head{display:flex;justify-content:space-between;align-items:baseline;gap:10px;margin-bottom:8px}
+.progress-label{font-weight:800;font-size:.92rem;color:var(--indigo-900)}
+.progress-pct{font-weight:800;font-size:.92rem;color:var(--teal-800)}
+.bar{height:10px;border-radius:999px;background:var(--indigo-50);overflow:hidden;border:1px solid var(--indigo-100)}
+.bar-fill{height:100%;width:0;border-radius:999px;background:linear-gradient(90deg,var(--indigo-800),var(--teal-700));transition:width .5s ease}
+.steps{list-style:none;display:grid;grid-template-columns:repeat(5,1fr);gap:6px;margin:10px 0 0;padding:0}
+.steps li{display:flex;align-items:center;gap:6px;font-size:.78rem;font-weight:700;color:var(--muted);min-width:0}
+.steps .dot{
+  width:24px;height:24px;border-radius:50%;flex-shrink:0;display:grid;place-items:center;
+  border:2px solid var(--border);background:#fff;font-size:.75rem;font-weight:800;color:var(--muted)
+}
+.steps .txt{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.steps li.done .dot{background:var(--teal-700);border-color:var(--teal-700);color:#fff}
+.steps li.current .dot{background:var(--indigo-800);border-color:var(--indigo-800);color:#fff;box-shadow:0 0 0 4px var(--indigo-100)}
+.steps li.current{color:var(--indigo-950)}
+
+/* ---------- TARJETA DE PANTALLA ---------- */
+.screen{background:var(--card);border-radius:var(--radius-lg);box-shadow:var(--shadow);overflow:hidden;animation:enter .45s ease both}
+.screen-head{
+  padding:clamp(18px,4vw,30px) clamp(18px,4vw,34px);
+  background:linear-gradient(120deg,var(--indigo-950),var(--indigo-800) 60%,var(--teal-700));
+  background-size:200% 200%;animation:flow 18s ease infinite;color:#fff;position:relative
+}
+.screen-head .tag{
+  display:inline-block;margin:0 0 10px;padding:4px 12px;border-radius:999px;background:rgba(255,255,255,.14);
+  border:1px solid rgba(255,255,255,.28);font-size:.78rem;font-weight:800;letter-spacing:.07em;text-transform:uppercase;color:#fff
+}
+.screen-head h2{color:#fff;font-size:clamp(1.45rem,3.6vw,2rem);margin:0 0 .5rem}
+.screen-head p{color:#eef2ff;font-size:1.05rem;margin:0 0 .35rem}
+.screen-body{padding:clamp(18px,4vw,34px)}
+.step{animation:enter .4s ease both}
+
+@keyframes enter{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+@keyframes flow{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+
+/* ---------- INICIO ---------- */
+.hero{display:grid;grid-template-columns:1.25fr .9fr;gap:20px;align-items:center}
+.hero h1{color:#fff;font-size:clamp(1.8rem,5vw,2.6rem);margin:.2rem 0 .4rem}
+.hero .subtitle{font-size:clamp(1.05rem,2.4vw,1.25rem);font-weight:600;color:#ccfbf1;margin:0}
+.hero-art{width:100%;max-width:280px;justify-self:center}
+.panel{border-radius:var(--radius);padding:18px 20px;border:2px solid var(--border-soft);background:#fff;margin-bottom:16px}
+.panel h3{font-size:1.1rem;display:flex;align-items:center;gap:8px}
+.panel.soft{background:var(--indigo-50);border-color:var(--indigo-100)}
+.panel.teal{background:var(--teal-50);border-color:var(--teal-100);border-left:6px solid var(--teal-700)}
+.panel.teal h3{color:var(--teal-800)}
+.how{list-style:none;padding:0;margin:0;display:grid;gap:8px}
+.how li{display:flex;gap:10px;align-items:flex-start;font-size:1rem;color:var(--ink-2)}
+.how svg{width:22px;height:22px;flex-shrink:0;margin-top:2px;color:var(--teal-700)}
+
+/* Cadenas tipo "A → B → C" · filas centradas, cajas armónicas */
+.chain{--cols:4;--gx:34px;--gy:22px;list-style:none;padding:0;margin:1.4rem auto 0;display:flex;flex-wrap:wrap;justify-content:center;align-items:stretch;gap:var(--gy) var(--gx);max-width:calc(var(--cols) * 230px + (var(--cols) - 1) * var(--gx))}
+.chain.c3,.chain.c5{--cols:3}
+.chain li{position:relative;display:flex;flex:0 0 calc((100% - (var(--cols) - 1) * var(--gx)) / var(--cols));min-width:0}
+.chain .pill{
+  position:relative;display:flex;align-items:center;justify-content:center;width:100%;min-height:60px;padding:14px 16px 12px;
+  border-radius:18px;background:#fff;border:2px solid var(--indigo-800);color:var(--indigo-900);box-shadow:0 3px 10px rgba(55,48,163,.08);
+  font-weight:800;font-size:.9rem;letter-spacing:.03em;line-height:1.3;text-align:center;text-wrap:balance;overflow-wrap:break-word;hyphens:none
+}
+.chain.big .pill{font-size:.98rem;min-height:66px}
+.chain .pill .n{
+  position:absolute;top:-13px;left:50%;transform:translateX(-50%);width:26px;height:26px;border-radius:50%;
+  background:var(--indigo-800);color:#fff;border:3px solid #fff;display:grid;place-items:center;font-size:.72rem;letter-spacing:0;line-height:1
+}
+.chain.teal .pill{border-color:var(--teal-700);color:var(--teal-800)}
+.chain.teal .pill .n{background:var(--teal-700)}
+.chain .arrow{position:absolute;left:100%;top:50%;width:var(--gx);transform:translateY(-50%);text-align:center;color:var(--teal-700);font-weight:800;font-size:1.15rem;line-height:1;pointer-events:none}
+.chain.c4 li:nth-child(4n) .arrow,.chain.c3 li:nth-child(3n) .arrow,.chain.c5 li:nth-child(3n) .arrow{visibility:hidden}
+@media (max-width:760px){
+  .chain{--gx:28px}
+  .chain.c3,.chain.c4,.chain.c5{--cols:2}
+  .chain.c4 li:nth-child(4n) .arrow,.chain.c3 li:nth-child(3n) .arrow,.chain.c5 li:nth-child(3n) .arrow{visibility:visible}
+  .chain.c3 li:nth-child(2n) .arrow,.chain.c4 li:nth-child(2n) .arrow,.chain.c5 li:nth-child(2n) .arrow{visibility:hidden}
+  .chain li:last-child:nth-child(odd) .arrow{visibility:hidden}
+}
+@media (max-width:520px){
+  .chain{--gx:24px;--gy:20px}
+  .chain .pill,.chain.big .pill{font-size:.8rem;letter-spacing:.01em;padding:14px 8px 10px;min-height:58px}
+}
+
+/* ---------- PREGUNTAS / OPCIONES ---------- */
+fieldset{border:0;margin:0;padding:0;min-width:0}
+legend{padding:0;margin:0 0 12px;font-size:clamp(1.12rem,2.6vw,1.3rem);font-weight:800;color:var(--indigo-950);line-height:1.35}
+.q-count{display:inline-block;font-size:.8rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--teal-800);margin-bottom:6px}
+.options{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:10px}
+.options.list{grid-template-columns:1fr}
+.opt{position:relative;display:block;cursor:pointer}
+.opt input{position:absolute;opacity:0;width:1px;height:1px;pointer-events:none}
+.opt-body{
+  display:flex;align-items:center;gap:12px;min-height:54px;height:100%;padding:12px 14px;border-radius:var(--radius-sm);
+  border:2px solid var(--border);background:#fff;font-weight:600;line-height:1.4;transition:border-color .15s,background .15s,box-shadow .15s
+}
+.opt:hover .opt-body{border-color:var(--indigo-600);background:#f8faff}
+.radio{width:22px;height:22px;border-radius:50%;border:2px solid #64748b;flex-shrink:0;display:grid;place-items:center;background:#fff}
+.radio::after{content:"";width:10px;height:10px;border-radius:50%;background:var(--indigo-800);transform:scale(0);transition:transform .15s}
+.opt input:checked + .opt-body{border-color:var(--indigo-800);background:var(--indigo-50);box-shadow:0 0 0 3px var(--indigo-100)}
+.opt input:checked + .opt-body .radio{border-color:var(--indigo-800)}
+.opt input:checked + .opt-body .radio::after{transform:scale(1)}
+.opt input:focus-visible + .opt-body{outline:3px solid var(--focus);outline-offset:2px}
+.opt input:disabled + .opt-body{cursor:default}
+.opt-ico{width:38px;height:38px;flex-shrink:0;border-radius:10px;background:var(--teal-50);color:var(--teal-800);display:grid;place-items:center}
+.opt-ico svg{width:26px;height:26px}
+.opt-main{display:flex;flex-direction:column;min-width:0}
+.opt-title{font-weight:800;color:var(--indigo-950)}
+.opt-desc{font-weight:500;color:var(--ink-2);font-size:.98rem}
+.tried{margin-left:auto;font-size:.75rem;font-weight:800;color:var(--teal-800);background:var(--teal-50);border:1px solid var(--teal-100);padding:2px 8px;border-radius:999px;white-space:nowrap}
+
+/* Tabla-lista de anclas */
+.anchor-head{display:grid;grid-template-columns:180px 1fr;gap:12px;padding:0 16px 6px 100px;font-size:.8rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.anchor-row .opt-body{display:grid;grid-template-columns:22px 38px 180px 1fr auto;gap:12px}
+
+.other-wrap{margin-top:10px}
+.field-label{display:block;font-weight:700;font-size:.95rem;color:var(--ink-2);margin-bottom:6px}
+.text-input,textarea{
+  width:100%;padding:12px 14px;border-radius:var(--radius-sm);border:2px solid var(--border);background:#fff;font-size:1rem;line-height:1.5
+}
+.text-input:focus,textarea:focus{border-color:var(--indigo-800);outline:3px solid var(--focus);outline-offset:1px}
+textarea{min-height:110px;resize:vertical}
+
+/* ---------- CALLOUTS / FEEDBACK ---------- */
+.callout{border-radius:var(--radius);padding:18px 20px;margin-top:18px;border:2px solid;animation:enter .35s ease both}
+.callout h3,.callout h4{display:flex;align-items:center;gap:8px;font-size:1.08rem;margin-bottom:.5rem}
+.callout svg.ci{width:24px;height:24px;flex-shrink:0}
+.callout.info{background:var(--teal-50);border-color:var(--teal-100);border-left:8px solid var(--teal-700)}
+.callout.info h3,.callout.info h4{color:var(--teal-800)}
+.callout.idea{background:var(--indigo-50);border-color:var(--indigo-100);border-left:8px solid var(--indigo-800)}
+.callout.idea h3,.callout.idea h4{color:var(--indigo-900)}
+.callout.ok{background:var(--green-50);border-color:var(--green-200);border-left:8px solid var(--green-800)}
+.callout.ok h4{color:var(--green-800)}
+.callout.warn{background:var(--amber-50);border-color:var(--amber-200);border-left:8px solid var(--amber-800)}
+.callout.warn h4{color:var(--amber-800)}
+.callout .status{display:inline-block;font-size:.78rem;font-weight:800;letter-spacing:.05em;text-transform:uppercase;padding:3px 10px;border-radius:999px;margin-bottom:8px}
+.callout.ok .status{background:#dcfce7;color:var(--green-800)}
+.callout.warn .status{background:#fef3c7;color:var(--amber-800)}
+.hl{background:#fff;border-radius:10px;padding:10px 12px;border:2px dashed var(--indigo-600)}
+
+.summary{display:flex;flex-wrap:wrap;gap:8px;margin-top:6px}
+.summary .chip{background:#fff;border:1px solid var(--indigo-100);border-radius:999px;padding:6px 12px;font-size:.92rem;font-weight:600;color:var(--ink-2)}
+.summary .chip b{color:var(--indigo-900)}
+
+/* ---------- PRÁCTICA / TEMPORIZADOR ---------- */
+.practice{display:grid;grid-template-columns:auto 1fr;gap:24px;align-items:center}
+.focus-card{display:flex;align-items:center;gap:14px;background:var(--teal-50);border:2px solid var(--teal-100);border-radius:var(--radius);padding:14px 16px;margin-bottom:14px}
+.focus-card .opt-ico{width:52px;height:52px;background:#fff}
+.focus-card .opt-ico svg{width:34px;height:34px}
+.focus-card .k{font-size:.78rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--teal-800);margin:0}
+.focus-card .t{font-size:1.2rem;font-weight:800;color:var(--indigo-950);margin:0}
+.focus-card .d{margin:0;color:var(--ink-2);font-weight:500}
+.timer{position:relative;width:min(220px,62vw);aspect-ratio:1;display:grid;place-items:center;margin:0 auto}
+.timer svg.ring{position:absolute;inset:0;width:100%;height:100%;transform:rotate(-90deg)}
+.timer .track{fill:none;stroke:var(--indigo-50);stroke-width:10}
+.timer .prog{fill:none;stroke:url(#gradRing);stroke-width:10;stroke-linecap:round;transition:stroke-dashoffset .25s linear}
+.timer .breath{position:absolute;inset:22%;border-radius:50%;background:radial-gradient(circle,var(--teal-100),rgba(204,251,241,0) 70%)}
+.timer.running .breath{animation:breathe 8s ease-in-out infinite}
+.timer .readout{position:relative;text-align:center}
+.timer .time{font-size:clamp(2.2rem,8vw,3rem);font-weight:800;color:var(--indigo-950);font-variant-numeric:tabular-nums;line-height:1}
+.timer .state{font-size:.85rem;font-weight:700;color:var(--muted);margin-top:4px}
+.timer.done .time{color:var(--teal-800)}
+@keyframes breathe{0%,100%{transform:scale(.75);opacity:.6}50%{transform:scale(1.12);opacity:1}}
+.timer-ctrl{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:14px}
+.timer-note{font-size:.92rem;color:var(--muted);text-align:center;margin-top:8px}
+
+/* ---------- SITUACIONES (Pantalla 4) ---------- */
+.quote{
+  position:relative;background:var(--indigo-50);border:2px solid var(--indigo-100);border-radius:20px;padding:18px 22px 18px 58px;
+  font-size:clamp(1.12rem,2.8vw,1.3rem);font-weight:700;color:var(--indigo-950);margin:0 0 18px
+}
+.quote svg{position:absolute;left:16px;top:18px;width:28px;height:28px;color:var(--indigo-600)}
+.opt .letter{width:30px;height:30px;border-radius:8px;background:var(--indigo-50);color:var(--indigo-900);font-weight:800;display:grid;place-items:center;flex-shrink:0}
+.opt.correct .opt-body,.opt.correct input:checked + .opt-body{border-color:var(--green-800);background:var(--green-50);box-shadow:none}
+.opt.correct .letter{background:var(--green-800);color:#fff}
+.opt.wrong .opt-body,.opt.wrong input:checked + .opt-body{border-color:var(--amber-800);background:var(--amber-50);box-shadow:none}
+.opt.wrong .letter{background:var(--amber-800);color:#fff}
+.opt .mark{margin-left:auto;font-size:.78rem;font-weight:800;white-space:nowrap;padding:2px 8px;border-radius:999px}
+.opt.correct .mark{background:#dcfce7;color:var(--green-800)}
+.opt.wrong .mark{background:#fef3c7;color:var(--amber-800)}
+details.more{margin-top:14px;border:2px solid var(--border-soft);border-radius:var(--radius);background:#fff}
+details.more summary{cursor:pointer;padding:14px 16px;font-weight:800;color:var(--indigo-900);min-height:44px;list-style-position:inside}
+details.more[open] summary{border-bottom:2px solid var(--border-soft)}
+details.more .inner{padding:14px 16px;display:grid;gap:12px}
+details.more .fb-item{font-size:.98rem;color:var(--ink-2)}
+details.more .fb-item b{color:var(--indigo-950);display:block;margin-bottom:2px}
+
+/* ---------- ESTRATEGIAS (Pantalla 5) ---------- */
+.strategies{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin:8px 0 20px}
+.strat{display:flex;gap:12px;align-items:flex-start;padding:14px;border-radius:var(--radius);background:#fff;border:2px solid var(--border-soft);box-shadow:var(--shadow-sm)}
+.strat .opt-ico{width:46px;height:46px}
+.strat .h4{margin:0 0 2px;font-size:.95rem;letter-spacing:.03em;color:var(--indigo-900)}
+.panel-title{font-size:1.1rem;display:flex;align-items:center;gap:8px;color:var(--indigo-950)}
+.panel.teal .panel-title{color:var(--teal-800)}
+.panel-title svg{width:24px;height:24px;flex-shrink:0}
+.opt-text{min-width:0}
+.quote p{margin:0}
+.strat p{margin:0;font-size:.98rem;color:var(--ink-2)}
+
+/* ---------- CIERRE ---------- */
+.result{display:grid;grid-template-columns:auto 1fr;gap:22px;align-items:center;padding:20px;border-radius:var(--radius);background:linear-gradient(135deg,var(--indigo-50),var(--teal-50));border:2px solid var(--indigo-100);margin-bottom:18px}
+.score-ring{position:relative;width:140px;height:140px}
+.score-ring svg{width:100%;height:100%;transform:rotate(-90deg)}
+.score-ring .track{fill:none;stroke:#fff;stroke-width:12}
+.score-ring .prog{fill:none;stroke:url(#gradRing);stroke-width:12;stroke-linecap:round;transition:stroke-dashoffset 1.2s ease}
+.score-ring .val{position:absolute;inset:0;display:grid;place-items:center;text-align:center}
+.score-ring .num{font-size:2.2rem;font-weight:800;color:var(--indigo-950);line-height:1}
+.score-ring .of{font-size:.8rem;font-weight:700;color:var(--muted)}
+.result h3{font-size:1.25rem;margin-bottom:.3rem}
+.kpis{display:flex;flex-wrap:wrap;gap:8px;margin:.6rem 0}
+.kpi{background:#fff;border:1px solid var(--indigo-100);border-radius:999px;padding:6px 12px;font-size:.9rem;font-weight:700;color:var(--ink-2)}
+.kpi b{color:var(--teal-800)}
+.recap{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin:0}
+.recap div{background:#fff;border:1px solid var(--border-soft);border-radius:12px;padding:10px 12px}
+.recap dt{font-size:.75rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--teal-800)}
+.recap dd{margin:2px 0 0;font-weight:600;color:var(--ink)}
+.closing-text p{font-size:1.06rem}
+.download{
+  display:grid;grid-template-columns:auto 1fr;gap:16px;align-items:center;padding:20px;border-radius:var(--radius);
+  background:var(--indigo-950);color:#fff;margin-top:18px
+}
+.download p{color:#e0e7ff;margin:0 0 12px}
+.download svg.doc{width:64px;height:78px}
+.download .btn-row{margin-top:0}
+
+/* ---------- BOTONES ---------- */
+.btn-row{display:flex;flex-wrap:wrap;gap:10px;justify-content:flex-end;align-items:center;margin-top:24px}
+.btn-row.center{justify-content:center}
+.btn-row.between{justify-content:space-between}
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:48px;padding:12px 26px;border-radius:999px;
+  border:2px solid transparent;font-weight:800;font-size:1.02rem;cursor:pointer;text-decoration:none;line-height:1.2;
+  transition:transform .15s,box-shadow .15s,background .15s,filter .15s
+}
+.btn svg{width:20px;height:20px;flex-shrink:0}
+.btn-primary{background:linear-gradient(135deg,var(--indigo-800),var(--indigo-900));color:#fff;box-shadow:0 6px 16px rgba(55,48,163,.3)}
+.btn-primary:not(:disabled):hover{transform:translateY(-2px);filter:brightness(1.12)}
+.btn-accent{background:linear-gradient(135deg,var(--teal-700),var(--teal-800));color:#fff;box-shadow:0 6px 16px rgba(15,118,110,.3)}
+.btn-accent:not(:disabled):hover{transform:translateY(-2px);filter:brightness(1.1)}
+.btn-ghost{background:#fff;color:var(--indigo-900);border-color:var(--indigo-800)}
+.btn-ghost:hover{background:var(--indigo-50)}
+.btn-light{background:#fff;color:var(--indigo-950)}
+.btn-light:hover{background:var(--teal-50)}
+.btn-outline-light{background:transparent;color:#fff;border-color:rgba(255,255,255,.7)}
+.btn-outline-light:hover{background:rgba(255,255,255,.12)}
+.btn-sm{min-height:44px;padding:8px 18px;font-size:.95rem}
+.btn:disabled{background:#e2e8f0;color:#475569;box-shadow:none;cursor:not-allowed;border-color:#cbd5e1}
+.hint{font-size:.9rem;color:var(--muted);margin:10px 0 0;text-align:right}
+
+/* ---------- PANTALLA DE SALIDA ---------- */
+.bye{text-align:center}
+.bye svg.wave-hand{width:120px;height:120px;margin:0 auto 6px;display:block}
+.bye .screen-head p{color:#e0e7ff}
+
+.footer{text-align:center;font-size:.82rem;font-weight:700;color:var(--muted);padding:4px 0 8px}
+
+/* ---------- RESPONSIVE ---------- */
+@media (max-width:760px){
+  .hero{grid-template-columns:1fr}
+  .hero-art{max-width:190px;grid-row:1}
+  .anchor-head{display:none}
+  .anchor-row .opt-body{grid-template-columns:22px 38px 1fr;row-gap:2px}
+  .anchor-row .opt-desc{grid-column:3}
+  .anchor-row .tried{grid-column:3;justify-self:start;margin-left:0}
+  .practice{grid-template-columns:1fr}
+  .strategies,.recap{grid-template-columns:1fr}
+  .result{grid-template-columns:1fr;justify-items:center;text-align:center}
+  .result .kpis{justify-content:center}
+  .download{grid-template-columns:1fr;text-align:center;justify-items:center}
+  .download .btn-row{justify-content:center}
+  .steps .txt{display:none}
+  .steps li{justify-content:center}
+  .steps li.current .txt{display:none}
+}
+@media (max-width:520px){
+  body{font-size:1rem}
+  .icon-btn .lbl{display:none}
+  .icon-btn{padding:0 11px}
+  .btn-row{flex-direction:column-reverse;align-items:stretch}
+  .btn-row .btn{width:100%}
+  .btn-row.between{flex-direction:column-reverse}
+  .options{grid-template-columns:1fr}
+  .hint{text-align:center}
+  .opt .mark{position:absolute;top:-11px;right:12px;margin:0}
+  .quote{padding:16px 16px 16px 50px}
+  .quote svg{left:12px}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+}
+@media (forced-colors:active){
+  .opt input:checked + .opt-body{outline:3px solid Highlight}
+  .btn{border:2px solid ButtonText}
+}
+
+@media (max-width:520px){
+  .download .btn-row{flex-direction:column}
+  .download p{text-align:left}
+}
+</style>
+</head>
+<body>
+<!-- ============ SPRITE DE ÍCONOS SVG (sin dependencias externas) ============ -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <linearGradient id="gradRing" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#3730a3"/><stop offset="1" stop-color="#0f766e"/>
+    </linearGradient>
+  </defs>
+  <symbol id="i-cuerpo" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="4.5" r="2.3"/><path d="M12 7.5v5.5M7.5 10.5l4.5 2.5 4.5-2.5M8 19l4-6 4 6"/><path d="M3.5 21.5h17"/><circle cx="8" cy="19.2" r=".6" fill="currentColor"/><circle cx="16" cy="19.2" r=".6" fill="currentColor"/></symbol>
+  <symbol id="i-vista" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></symbol>
+  <symbol id="i-sonido" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 9.5v5h3.5l4.5 4V5.5L7 9.5H3.5z"/><path d="M15 9.2a4 4 0 0 1 0 5.6M17.8 6.5a8 8 0 0 1 0 11"/></symbol>
+  <symbol id="i-tacto" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 13.5V5.2a1.6 1.6 0 0 1 3.2 0V11"/><path d="M11.2 10.5V3.8a1.6 1.6 0 0 1 3.2 0v6.9"/><path d="M14.4 10.8V5.6a1.6 1.6 0 0 1 3.2 0v6"/><path d="M17.6 11.5V9a1.6 1.6 0 0 1 3.2 0v5.5a7.5 7.5 0 0 1-7.5 7.5h-.8a6.5 6.5 0 0 1-5.3-2.8L3.6 15a1.7 1.7 0 0 1 2.7-2L8 15"/></symbol>
+  <symbol id="i-movimiento" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="14.5" cy="4" r="2"/><path d="M12.5 21l.5-5-3-2.5 1.5-5"/><path d="M6.5 12l2-3.5 3-.5 2.5 3 3 1.5"/><path d="M13 16l3 1.5 1 3.5"/></symbol>
+  <symbol id="i-respiracion" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h11a3 3 0 1 0-3-3"/><path d="M3 12h15.5a3 3 0 1 1-3 3"/><path d="M3 16h7"/></symbol>
+  <symbol id="i-agua" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5.5 3h13L17 20.2a2 2 0 0 1-2 1.8H9a2 2 0 0 1-2-1.8L5.5 3z"/><path d="M6.5 9.5c2-1 4-1 5.5 0s3.5 1 5.5 0"/></symbol>
+  <symbol id="i-pasos" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 16.5c-1.7 0-3-1.9-3-4.7S5.1 6 7 6s3 2.7 3 5.8-1.3 4.7-3 4.7z"/><path d="M5.2 19.5h3.6"/><path d="M17 12.5c-1.7 0-3-1.9-3-4.7S15.1 2 17 2s3 2.7 3 5.8-1.3 4.7-3 4.7z"/><path d="M15.2 15.5h3.6"/></symbol>
+  <symbol id="i-ordenar" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="13" width="8" height="8" rx="1.5"/><rect x="13" y="13" width="8" height="8" rx="1.5"/><rect x="8" y="3" width="8" height="8" rx="1.5"/></symbol>
+  <symbol id="i-manos" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.5s5.5 6 5.5 10a5.5 5.5 0 0 1-11 0c0-4 5.5-10 5.5-10z"/><path d="M9.5 13a2.5 2.5 0 0 0 2.5 2.5"/></symbol>
+  <symbol id="i-documento" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h6"/></symbol>
+  <symbol id="i-otra" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 8v8M8 12h8"/></symbol>
+  <symbol id="i-checkin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.4" fill="currentColor"/></symbol>
+  <symbol id="i-ancla" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="5" r="2.4"/><path d="M12 7.4V21M8 11h8"/><path d="M4 13.5h1.5a6.5 6.5 0 0 0 13 0H20"/></symbol>
+  <symbol id="i-accion" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M10.2 9.2l2.3-1.7V17"/></symbol>
+  <symbol id="i-sinjuzgar" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a8.5 8.5 0 0 1-12.3 7.6L3.5 21l1.3-4.8A8.5 8.5 0 1 1 21 12z"/><path d="M8.5 12h7"/></symbol>
+  <symbol id="i-sound-on" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 9.5v5h3.5l4.5 4V5.5L7 9.5H3.5z"/><path d="M15 9.2a4 4 0 0 1 0 5.6M17.8 6.5a8 8 0 0 1 0 11"/></symbol>
+  <symbol id="i-sound-off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 9.5v5h3.5l4.5 4V5.5L7 9.5H3.5z"/><path d="M16 9.5l5 5M21 9.5l-5 5"/></symbol>
+  <symbol id="i-play" viewBox="0 0 24 24"><path d="M7 4.8v14.4a1 1 0 0 0 1.5.9l11.3-7.2a1 1 0 0 0 0-1.7L8.5 3.9A1 1 0 0 0 7 4.8z" fill="currentColor"/></symbol>
+  <symbol id="i-pause" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M8 5v14M16 5v14"/></symbol>
+  <symbol id="i-reset" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></symbol>
+  <symbol id="i-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+  <symbol id="i-left" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M11 6l-6 6 6 6"/></symbol>
+  <symbol id="i-download" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12M7 10l5 5 5-5M4 20h16"/></symbol>
+  <symbol id="i-external" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></symbol>
+  <symbol id="i-info" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7.5v.2"/></symbol>
+  <symbol id="i-bulb" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-3.5 10.9c.6.5 1 1.2 1 2V16h5v-.1c0-.8.4-1.5 1-2A6 6 0 0 0 12 3z"/></symbol>
+  <symbol id="i-quote" viewBox="0 0 24 24"><path fill="currentColor" d="M4 18v-6.2C4 8.3 6 5.9 9.2 5l.7 1.7C8.1 7.4 7.1 8.8 7 10.6h3.2V18H4zm10 0v-6.2c0-3.5 2-5.9 5.2-6.8l.7 1.7c-1.8.7-2.8 2.1-2.9 3.9h3.2V18H14z"/></symbol>
+  <symbol id="i-leaf" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 19c0-8 5-14 15-15-1 10-7 15-15 15z"/><path d="M5 19l7-7"/></symbol>
+  <symbol id="i-exit" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 4H6a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h4"/><path d="M15 16l4-4-4-4M19 12H9"/></symbol>
+  <symbol id="i-flag" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 21V4M5 4h11l-2 4 2 4H5"/></symbol>
+</svg>
+
+<div class="app" id="app">
+
+  <!-- ============ BARRA SUPERIOR ============ -->
+  <header class="topbar">
+    <div class="brand">
+      <svg class="brand-mark" viewBox="0 0 40 40" aria-hidden="true" focusable="false">
+        <rect width="40" height="40" rx="12" fill="#3730a3"/>
+        <circle cx="20" cy="20" r="11" fill="none" stroke="#99f6e4" stroke-width="2" stroke-dasharray="2 4"/>
+        <path d="M20 12c3.5 3 5 6 5 8.5a5 5 0 0 1-10 0c0-2.5 1.5-5.5 5-8.5z" fill="#ccfbf1"/>
+        <path d="M20 17v10" stroke="#3730a3" stroke-width="1.6" stroke-linecap="round"/>
+      </svg>
+      <div class="brand-text">
+        <p class="eyebrow">Módulo 4 · Clase 1 · UMCE-SENADIS</p>
+        <p class="brand-title">Pausa, observa y elige</p>
+      </div>
+    </div>
+    <button type="button" class="icon-btn" id="btn-sound" aria-pressed="true">
+      <svg aria-hidden="true"><use href="#i-sound-on"/></svg><span class="lbl">Sonido</span>
+      <span class="sr-only" id="sound-state">activado</span>
+    </button>
+  </header>
+
+  <!-- ============ PROGRESO ============ -->
+  <nav class="progress" id="progress" aria-label="Progreso de la actividad" hidden>
+    <div class="progress-head">
+      <span class="progress-label" id="progress-label">Pantalla 1 de 5 · Me observo</span>
+      <span class="progress-pct" id="progress-pct" aria-hidden="true">0%</span>
+    </div>
+    <div class="bar" id="bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-labelledby="progress-label">
+      <div class="bar-fill" id="bar-fill"></div>
+    </div>
+    <ol class="steps" id="steps">
+      <li><span class="dot">1</span><span class="txt">Me observo</span></li>
+      <li><span class="dot">2</span><span class="txt">Exploro</span></li>
+      <li><span class="dot">3</span><span class="txt">Practico</span></li>
+      <li><span class="dot">4</span><span class="txt">Reconozco</span></li>
+      <li><span class="dot">5</span><span class="txt">Integremos</span></li>
+    </ol>
+  </nav>
+
+  <main id="main">
+
+    <!-- ================= INICIO ================= -->
+    <section class="screen" id="screen-inicio" aria-labelledby="t-inicio">
+      <div class="screen-head">
+        <div class="hero">
+          <div>
+            <p class="tag">Actividad Clase 1</p>
+            <h1 id="t-inicio" tabindex="-1">Pausa, observa y elige</h1>
+            <p class="subtitle">Exploración guiada de cuatro estrategias de mindfulness</p>
+          </div>
+          <svg class="hero-art" viewBox="0 0 240 240" role="img" aria-label="Ilustración: persona sentada haciendo una pausa consciente, rodeada de círculos que representan la atención.">
+            <circle cx="120" cy="120" r="112" fill="#ffffff" fill-opacity=".07"/>
+            <circle cx="120" cy="120" r="88" fill="none" stroke="#99f6e4" stroke-opacity=".55" stroke-width="2" stroke-dasharray="3 9"/>
+            <circle cx="120" cy="116" r="62" fill="#ffffff" fill-opacity=".1"/>
+            <path d="M40 92c10-6 20-4 26 4-10 4-19 3-26-4z" fill="#5eead4"/>
+            <path d="M200 70c-10-5-20-2-25 6 10 3 19 1 25-6z" fill="#a5b4fc"/>
+            <circle cx="186" cy="150" r="4" fill="#ccfbf1"/><circle cx="54" cy="152" r="3" fill="#c7d2fe"/><circle cx="170" cy="44" r="2.5" fill="#fff"/>
+            <path d="M58 178c14-16 38-20 62-13 24-7 48-3 62 13-18 11-42 11-62 6-20 5-44 5-62-6z" fill="#5eead4"/>
+            <path d="M120 96c-19 0-29 15-31 35l-2 22h66l-2-22c-2-20-12-35-31-35z" fill="#ffffff"/>
+            <path d="M93 124c-9 9-12 20-5 25l32 5 32-5c7-5 4-16-5-25" fill="none" stroke="#c7d2fe" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+            <circle cx="88" cy="150" r="5.5" fill="#ccfbf1"/><circle cx="152" cy="150" r="5.5" fill="#ccfbf1"/>
+            <circle cx="120" cy="76" r="16" fill="#ccfbf1"/>
+            <path d="M113 78q3.5 3 7 0M121 78q3.5 3 7 0" fill="none" stroke="#312e81" stroke-width="2" stroke-linecap="round" transform="translate(-4.5 0)"/>
+            <path d="M104 204h32" stroke="#99f6e4" stroke-width="3" stroke-linecap="round" stroke-opacity=".6"/>
+          </svg>
+        </div>
+      </div>
+      <div class="screen-body">
+        <div class="panel soft">
+          <h2 class="panel-title"><svg class="ci" aria-hidden="true" width="24" height="24" style="color:var(--indigo-800)"><use href="#i-flag"/></svg>Propósito para el participante</h2>
+          <p>En esta actividad explorarás cuatro estrategias de mindfulness para reconocer lo que ocurre en ti, regresar al presente y ampliar tu espacio de elección.</p>
+          <p>No necesitas alcanzar la calma, dejar la mente en blanco ni sentirte de una manera determinada.</p>
+          <p>La invitación es experimentar, observar y reconocer tu propia respuesta, para que finalmente puedas ir construyendo tu propio repertorio de estrategias.</p>
+        </div>
+        <div class="panel">
+          <h2 class="panel-title">Estrategias a practicar:</h2>
+          <ol class="chain big c4" aria-label="Secuencia de estrategias">
+            <li><span class="pill"><span class="n" aria-hidden="true">1</span>ME OBSERVO</span><span class="arrow" aria-hidden="true">→</span></li>
+            <li><span class="pill"><span class="n" aria-hidden="true">2</span>ELIJO UN ANCLA</span><span class="arrow" aria-hidden="true">→</span></li>
+            <li><span class="pill"><span class="n" aria-hidden="true">3</span>VUELVO A UNA ACCIÓN</span><span class="arrow" aria-hidden="true">→</span></li>
+            <li><span class="pill"><span class="n" aria-hidden="true">4</span>OBSERVO SIN JUZGAR</span></li>
+          </ol>
+        </div>
+        <div class="panel teal">
+          <h2 class="panel-title"><svg class="ci" aria-hidden="true" width="24" height="24"><use href="#i-info"/></svg>Cómo avanzar en esta actividad</h2>
+          <ul class="how">
+            <li><svg aria-hidden="true"><use href="#i-right"/></svg><span>Avanza a tu ritmo con los botones <b>Continuar</b> y <b>Siguiente</b>. La barra superior te muestra en qué pantalla estás.</span></li>
+            <li><svg aria-hidden="true"><use href="#i-play"/></svg><span>En las pantallas 2 y 3 encontrarás un temporizador <b>opcional</b> para acompañar tu práctica. Puedes pausarlo o continuar cuando lo decidas.</span></li>
+            <li><svg aria-hidden="true"><use href="#i-sound-on"/></svg><span>Los sonidos son suaves. Puedes desactivarlos con el botón <b>Sonido</b>.</span></li>
+            <li><svg aria-hidden="true"><use href="#i-download"/></svg><span>Al finalizar podrás descargar tu ficha de registro.</span></li>
+          </ul>
+        </div>
+        <div class="btn-row center">
+          <button type="button" class="btn btn-accent" id="btn-start">Comenzar <svg aria-hidden="true"><use href="#i-right"/></svg></button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= PANTALLA 1 · ME OBSERVO ================= -->
+    <section class="screen" id="screen-p1" aria-labelledby="t-p1" hidden>
+      <div class="screen-head">
+        <p class="tag">Pantalla 1 · Me observo</p>
+        <h2 id="t-p1" tabindex="-1">Check-in consciente</h2>
+        <p>Haz una pausa y reconoce qué está ocurriendo en ti ahora mismo.</p>
+        <p>No necesitas cambiar nada. Solo observar.</p>
+      </div>
+      <div class="screen-body">
+        <div class="step" id="p1-q"></div>
+        <div class="step" id="p1-fb" hidden>
+          <div class="callout info" style="margin-top:0">
+            <h3 id="t-p1fb" tabindex="-1"><svg class="ci" aria-hidden="true"><use href="#i-leaf"/></svg>Antes de continuar</h3>
+            <p>No hay respuestas correctas o incorrectas. El check-in no busca modificar inmediatamente tu experiencia, sino reconocerla antes de decidir qué hacer con ella.</p>
+          </div>
+          <div class="panel soft" style="margin-top:16px;margin-bottom:0">
+            <h3>Tu check-in</h3>
+            <div class="summary" id="p1-summary"></div>
+          </div>
+          <div class="btn-row between">
+            <button type="button" class="btn btn-ghost" data-prev><svg aria-hidden="true"><use href="#i-left"/></svg>Anterior</button>
+            <button type="button" class="btn btn-primary" data-next>Continuar <svg aria-hidden="true"><use href="#i-right"/></svg></button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= PANTALLA 2 · EXPLORO ================= -->
+    <section class="screen" id="screen-p2" aria-labelledby="t-p2" hidden>
+      <div class="screen-head">
+        <p class="tag">Pantalla 2 · Exploro</p>
+        <h2 id="t-p2" tabindex="-1">Elegir un ancla</h2>
+        <p>Un ancla es un punto al que puedes dirigir tu atención durante unos instantes.</p>
+        <p>Elige una posibilidad y explórala durante 30 segundos.</p>
+      </div>
+      <div class="screen-body">
+        <!-- 2a · elegir -->
+        <div class="step" id="p2-elegir">
+          <fieldset>
+            <legend id="t-p2a" tabindex="-1">Elige una posibilidad</legend>
+            <div class="anchor-head" aria-hidden="true"><span>Posibilidad</span><span>¿Qué puedes hacer?</span></div>
+            <div class="options list" id="p2-options"></div>
+          </fieldset>
+          <div class="btn-row">
+            <button type="button" class="btn btn-primary" id="p2-go" disabled>Continuar <svg aria-hidden="true"><use href="#i-right"/></svg></button>
+          </div>
+          <p class="hint" id="p2-hint">Selecciona una posibilidad para continuar.</p>
+        </div>
+        <!-- 2b · práctica 30 s -->
+        <div class="step" id="p2-practica" hidden>
+          <div class="focus-card">
+            <span class="opt-ico"><svg aria-hidden="true"><use id="p2-f-ico" href="#i-cuerpo"/></svg></span>
+            <div>
+              <p class="k">Tu ancla</p>
+              <h3 class="t" id="t-p2b" tabindex="-1">Cuerpo</h3>
+              <p class="d" id="p2-f-desc"></p>
+            </div>
+          </div>
+          <div id="timer-p2"></div>
+          <div class="btn-row between">
+            <button type="button" class="btn btn-ghost" data-goto="p2-elegir"><svg aria-hidden="true"><use href="#i-left"/></svg>Elegir otra</button>
+            <button type="button" class="btn btn-primary" data-next>Continuar <svg aria-hidden="true"><use href="#i-right"/></svg></button>
+          </div>
+        </div>
+        <!-- 2c · reflexión -->
+        <div class="step" id="p2-reflexion" hidden>
+          <h3 id="t-p2c" tabindex="-1">Después de experimentar</h3>
+          <fieldset>
+            <legend>¿Cómo fue esta experiencia para ti?</legend>
+            <div class="options list" id="p2-exp"></div>
+          </fieldset>
+          <div class="callout idea" id="p2-idea" hidden>
+            <h4><svg class="ci" aria-hidden="true"><use href="#i-bulb"/></svg>Idea importante</h4>
+            <p id="p2-idea-1">Que tu atención se desplace no significa que realizaste incorrectamente la actividad. Reconocer que se desplazó y volver forma parte de la experiencia.</p>
+            <p id="p2-idea-2">Y si el ancla elegida no te resulta accesible o confortable, puedes elegir otra.</p>
+          </div>
+          <div class="btn-row between">
+            <button type="button" class="btn btn-ghost" id="p2-otra"><svg aria-hidden="true"><use href="#i-reset"/></svg>Elegir otra</button>
+            <button type="button" class="btn btn-primary" id="p2-cont" disabled>Continuar <svg aria-hidden="true"><use href="#i-right"/></svg></button>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- ================= PANTALLA 3 · PRACTICO ================= -->
+    <section class="screen" id="screen-p3" aria-labelledby="t-p3" hidden>
+      <div class="screen-head">
+        <p class="tag">Pantalla 3 · Practico</p>
+        <h2 id="t-p3" tabindex="-1">Una cosa a la vez</h2>
+        <p>Elige una acción cotidiana sencilla y realízala durante aproximadamente 60 segundos.</p>
+      </div>
+      <div class="screen-body">
+        <!-- 3a · elegir -->
+        <div class="step" id="p3-elegir">
+          <fieldset>
+            <legend id="t-p3a" tabindex="-1">Puedes:</legend>
+            <div class="options" id="p3-options"></div>
+            <div class="other-wrap" id="p3-other-wrap" hidden>
+              <label class="field-label" for="p3-other">¿Qué acción sencilla elegiste? (opcional)</label>
+              <input class="text-input" id="p3-other" type="text" maxlength="120" autocomplete="off">
+            </div>
+          </fieldset>
+          <div class="btn-row">
+            <button type="button" class="btn btn-primary" id="p3-go" disabled>Continuar <svg aria-hidden="true"><use href="#i-right"/></svg></button>
+          </div>
+          <p class="hint" id="p3-hint">Selecciona una acción para continuar.</p>
+        </div>
+        <!-- 3b · práctica 60 s -->
+        <div class="step" id="p3-practica" hidden>
+          <div class="focus-card">
+            <span class="opt-ico"><svg aria-hidden="true"><use id="p3-f-ico" href="#i-agua"/></svg></span>
+            <div>
+              <p class="k">Tu acción</p>
+              <h3 class="t" id="t-p3b" tabindex="-1">Beber agua.</h3>
+            </div>
+          </div>
+          <div class="practice">
+            <div id="timer-p3"></div>
+            <div class="callout info" style="margin-top:0">
+              <h4><svg class="ci" aria-hidden="true"><use href="#i-accion"/></svg>Mientras realizas la acción</h4>
+              <p>Intenta atender solamente a aquello que estás haciendo.</p>
+              <p>Si notas que tu atención se desplaza, reconócelo y vuelve a la acción.</p>
+            </div>
+          </div>
+          <div class="btn-row between">
+            <button type="button" class="btn btn-ghost" data-goto="p3-elegir"><svg aria-hidden="true"><use href="#i-left"/></svg>Cambiar acción</button>
+            <button type="button" class="btn btn-primary" data-next>Continuar <svg aria-hidden="true"><use href="#i-right"/></svg></button>
+          </div>
+        </div>
+        <!-- 3c · reflexión -->
+        <div class="step" id="p3-reflexion" hidden>
+          <h3 id="t-p3c" tabindex="-1">Al finalizar</h3>
+          <fieldset>
+            <legend>¿Qué ocurrió con tu atención?</legend>
+            <div class="options list" id="p3-att"></div>
+          </fieldset>
+          <div class="callout idea" id="p3-idea" hidden>
+            <h4><svg class="ci" aria-hidden="true"><use href="#i-bulb"/></svg>Para recordar</h4>
+            <p>El propósito no es conseguir una concentración perfecta.</p>
+            <p>La práctica consiste en:</p>
+            <ol class="chain teal big c3" aria-label="Secuencia de la práctica">
+              <li><span class="pill">NOTAR</span><span class="arrow" aria-hidden="true">→</span></li>
+              <li><span class="pill">RECONOCER</span><span class="arrow" aria-hidden="true">→</span></li>
+              <li><span class="pill">REGRESAR</span></li>
+            </ol>
+          </div>
+          <div class="btn-row between">
+            <button type="button" class="btn btn-ghost" data-prev><svg aria-hidden="true"><use href="#i-left"/></svg>Anterior</button>
+            <button type="button" class="btn btn-primary" id="p3-cont" disabled>Continuar <svg aria-hidden="true"><use href="#i-right"/></svg></button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= PANTALLA 4 · RECONOZCO ================= -->
+    <section class="screen" id="screen-p4" aria-labelledby="t-p4" hidden>
+      <div class="screen-head">
+        <p class="tag">Pantalla 4 · Reconozco</p>
+        <h2 id="t-p4" tabindex="-1">Observar sin juzgar</h2>
+        <p>Ahora practicaremos una distinción importante: observar una experiencia no es lo mismo que evaluarla inmediatamente.</p>
+        <p>Lee cada situación y selecciona la alternativa que representa mejor una observación.</p>
+      </div>
+      <div class="screen-body">
+        <div class="step" id="p4-sit"></div>
+      </div>
+    </section>
+
+    <!-- ================= PANTALLA 5 · INTEGREMOS ================= -->
+    <section class="screen" id="screen-p5" aria-labelledby="t-p5" hidden>
+      <div class="screen-head">
+        <p class="tag">Pantalla 5 · Integremos las estrategias mindfulness</p>
+        <h2 id="t-p5" tabindex="-1">¿Qué descubrí?</h2>
+      </div>
+      <div class="screen-body">
+        <div class="step" id="p5-step">
+          <p><strong>Has explorado cuatro estrategias:</strong></p>
+          <div class="strategies">
+            <div class="strat"><span class="opt-ico"><svg aria-hidden="true"><use href="#i-checkin"/></svg></span><div><h3 class="h4">CHECK-IN CONSCIENTE</h3><p>Reconocer lo que ocurre en mí.</p></div></div>
+            <div class="strat"><span class="opt-ico"><svg aria-hidden="true"><use href="#i-ancla"/></svg></span><div><h3 class="h4">ELEGIR UN ANCLA</h3><p>Recuperar un punto en el que apoyar mi atención.</p></div></div>
+            <div class="strat"><span class="opt-ico"><svg aria-hidden="true"><use href="#i-accion"/></svg></span><div><h3 class="h4">UNA COSA A LA VEZ</h3><p>Volver conscientemente a la acción presente.</p></div></div>
+            <div class="strat"><span class="opt-ico"><svg aria-hidden="true"><use href="#i-sinjuzgar"/></svg></span><div><h3 class="h4">OBSERVAR SIN JUZGAR</h3><p>Describir mi experiencia antes de evaluarla.</p></div></div>
+          </div>
+          <p><strong>Ahora piensa en tu propio recorrido.</strong></p>
+          <fieldset>
+            <legend>¿Cuál de estas afirmaciones representa mejor lo que aprendiste?</legend>
+            <div class="options list" id="p5-options"></div>
+            <div class="other-wrap" id="p5-other-wrap" hidden>
+              <label class="field-label" for="p5-other">Escribe tu afirmación (opcional)</label>
+              <input class="text-input" id="p5-other" type="text" maxlength="160" autocomplete="off">
+            </div>
+          </fieldset>
+          <div class="btn-row between">
+            <button type="button" class="btn btn-ghost" data-prev><svg aria-hidden="true"><use href="#i-left"/></svg>Anterior</button>
+            <button type="button" class="btn btn-accent" id="p5-fin" disabled>Finalizar <svg aria-hidden="true"><use href="#i-check"/></svg></button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= CIERRE ================= -->
+    <section class="screen" id="screen-cierre" aria-labelledby="t-cierre" hidden>
+      <div class="screen-head">
+        <p class="tag">Cierre</p>
+        <h2 id="t-cierre" tabindex="-1">Pausa, observa y elige</h2>
+      </div>
+      <div class="screen-body">
+        <div class="result">
+          <div class="score-ring" aria-hidden="true">
+            <svg viewBox="0 0 140 140"><circle class="track" cx="70" cy="70" r="60"/><circle class="prog" id="score-prog" cx="70" cy="70" r="60" stroke-dasharray="376.99" stroke-dashoffset="376.99"/></svg>
+            <div class="val"><div><div class="num" id="score-num">0</div><div class="of">de 3</div></div></div>
+          </div>
+          <div>
+            <h3>Puntaje obtenido: <span id="score-text">0 de 3</span></h3>
+            <p id="score-msg"></p>
+            <div class="kpis">
+              <span class="kpi">Estrategias exploradas: <b>4 de 4</b></span>
+              <span class="kpi">Anclas exploradas: <b id="kpi-anclas">1</b></span>
+              <span class="kpi">Observaciones reconocidas: <b id="kpi-obs">0 de 3</b></span>
+            </div>
+          </div>
+        </div>
+
+        <div class="panel closing-text">
+          <p>En esta actividad no buscábamos que consiguieras la calma ni que encontraras una estrategia que funcionara siempre.</p>
+          <p><strong>Buscábamos algo diferente: ampliar tu repertorio.</strong></p>
+          <p>Experimentar mindfulness implica aprender a reconocer qué ocurre en nosotros, explorar distintas maneras de dirigir la atención y descubrir qué posibilidades pueden resultar accesibles en diferentes momentos.</p>
+          <p>Por eso, una estrategia puede:</p>
+          <ol class="chain big c4" aria-label="Decisiones posibles sobre una estrategia" style="margin-bottom:1rem">
+            <li><span class="pill">MANTENERSE</span><span class="arrow" aria-hidden="true">→</span></li>
+            <li><span class="pill">AJUSTARSE</span><span class="arrow" aria-hidden="true">→</span></li>
+            <li><span class="pill">CAMBIARSE</span><span class="arrow" aria-hidden="true">→</span></li>
+            <li><span class="pill">DETENERSE</span></li>
+          </ol>
+          <p>Y todas esas decisiones pueden formar parte de la autorregulación.</p>
+          <p class="hl"><strong>No existe una única manera de estar presente.</strong></p>
+        </div>
+
+        <div class="panel soft">
+          <p style="margin:0;font-size:1.08rem;color:var(--indigo-950);font-weight:800">Si volvieras a realizar esta actividad, ¿qué mantendrías, cambiarías o adaptarías?</p>
+        </div>
+
+        <div class="panel">
+          <h3>Mi recorrido</h3>
+          <p style="color:var(--muted);font-size:.95rem">Úsalo como referencia para completar tu ficha de registro.</p>
+          <dl class="recap" id="recap"></dl>
+        </div>
+
+        <div class="download">
+          <svg class="doc" viewBox="0 0 64 78" aria-hidden="true" focusable="false">
+            <path d="M6 2h36l20 20v50a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V6a4 4 0 0 1 4-4z" fill="#fff"/>
+            <path d="M42 2v16a4 4 0 0 0 4 4h16" fill="#ccfbf1"/>
+            <rect x="12" y="32" width="38" height="5" rx="2.5" fill="#3730a3"/>
+            <rect x="12" y="43" width="30" height="4" rx="2" fill="#99f6e4"/>
+            <rect x="12" y="52" width="34" height="4" rx="2" fill="#c7d2fe"/>
+            <rect x="12" y="61" width="24" height="4" rx="2" fill="#99f6e4"/>
+          </svg>
+          <div>
+            <p>Para finalizar esta actividad, descarga la guía de registro y continúa construyendo tu repertorio personal de estrategias de mindfulness. En ella podrás registrar aquello que experimentaste, reconocer qué estrategias podrían ser útiles para ti y pensar cómo podrías mantenerlas, ajustarlas, cambiarlas o detenerlas según tus necesidades y el contexto. Recuerda: no buscamos una técnica correcta, sino ampliar nuestras posibilidades de elección.</p>
+            <div class="btn-row" style="justify-content:flex-start">
+              <a class="btn btn-light" id="btn-descargar" target="_blank" rel="noopener"
+                 href="https://drive.google.com/uc?export=download&amp;id=1cxIUrv92EA8_to1jk_w7G09B-hPWi-cF">
+                <svg aria-hidden="true"><use href="#i-download"/></svg>Descargar ficha 1 (.docx)<span class="sr-only"> (se abre en una nueva pestaña)</span>
+              </a>
+              <a class="btn btn-outline-light btn-sm" target="_blank" rel="noopener"
+                 href="https://docs.google.com/document/d/1cxIUrv92EA8_to1jk_w7G09B-hPWi-cF/edit?usp=sharing&amp;ouid=107456956016402398556&amp;rtpof=true&amp;sd=true">
+                <svg aria-hidden="true"><use href="#i-external"/></svg>Abrir en Google Docs<span class="sr-only"> (se abre en una nueva pestaña)</span>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="btn-row center">
+          <button type="button" class="btn btn-ghost" id="btn-retry"><svg aria-hidden="true"><use href="#i-reset"/></svg>Volver a intentar</button>
+          <button type="button" class="btn btn-primary" id="btn-exit"><svg aria-hidden="true"><use href="#i-exit"/></svg>Salir de la actividad</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= SALIDA ================= -->
+    <section class="screen bye" id="screen-salida" aria-labelledby="t-salida" hidden>
+      <div class="screen-head">
+        <svg class="wave-hand" viewBox="0 0 120 120" aria-hidden="true" focusable="false">
+          <circle cx="60" cy="60" r="56" fill="#ffffff" fill-opacity=".1"/>
+          <circle cx="60" cy="60" r="40" fill="none" stroke="#99f6e4" stroke-width="2" stroke-dasharray="3 7"/>
+          <path d="M60 36c10 9 15 17 15 24a15 15 0 0 1-30 0c0-7 5-15 15-24z" fill="#ccfbf1"/>
+          <path d="M60 50v30" stroke="#312e81" stroke-width="3" stroke-linecap="round"/>
+        </svg>
+        <h2 id="t-salida" tabindex="-1">¡Hasta pronto!</h2>
+        <p style="margin-top:.6rem">Has finalizado la actividad «Pausa, observa y elige».</p>
+        <p>Ya puedes cerrar esta ventana y continuar con tu módulo en la plataforma.</p>
+      </div>
+      <div class="screen-body">
+        <div class="btn-row center" style="margin-top:0">
+          <button type="button" class="btn btn-ghost" id="btn-restart"><svg aria-hidden="true"><use href="#i-reset"/></svg>Volver a empezar</button>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <p class="footer">UMCE-SENADIS · Habilidades socioemocionales en educación inclusiva · Módulo 4</p>
+  <div id="sr-live" class="sr-only" aria-live="polite" aria-atomic="true"></div>
+</div>
+<script>
+(function () {
+  'use strict';
+
+  /* =========================================================
+     CONTENIDO (textos del cliente, sin modificaciones)
+     ========================================================= */
+  var P1 = [
+    { key: 'Cuerpo', q: '1. ¿Qué siento en mi cuerpo?',
+      opts: ['Tensión', 'Cansancio', 'Inquietud', 'Comodidad', 'Necesidad de movimiento', 'No identifico', 'Otra'] },
+    { key: 'Emoción o estado', q: '2. ¿Qué emoción o estado reconozco?',
+      opts: ['Tranquilidad', 'Frustración', 'Preocupación', 'Entusiasmo', 'Cansancio', 'Inquietud', 'No identifico', 'Otra'] },
+    { key: 'Atención', q: '3. ¿Dónde está mi atención?',
+      opts: ['En esta actividad', 'En algo anterior', 'En algo futuro', 'En varias cosas', 'No identifico', 'Otra'] },
+    { key: 'Ganas de hacer', q: '4. ¿Qué ganas tengo de hacer?',
+      opts: ['Continuar', 'Detenerme', 'Moverme', 'Terminar rápido', 'Cambiar de actividad', 'No identifico', 'Otra'] }
+  ];
+
+  var ANCLAS = [
+    { t: 'Cuerpo',      d: 'Siente uno o más puntos de apoyo de tu cuerpo.', i: 'i-cuerpo' },
+    { t: 'Vista',       d: 'Observa un objeto y sus detalles.',               i: 'i-vista' },
+    { t: 'Sonido',      d: 'Reconoce los sonidos presentes.',                 i: 'i-sonido' },
+    { t: 'Tacto',       d: 'Explora un objeto con el tacto.',                 i: 'i-tacto' },
+    { t: 'Movimiento',  d: 'Realiza un movimiento consciente.',               i: 'i-movimiento' },
+    { t: 'Respiración', d: 'Observa tu respiración natural.',                 i: 'i-respiracion' }
+  ];
+
+  var P2_EXP = ['Permanecí en el ancla.', 'Mi atención se desplazó y regresé.', 'Mi atención se desplazó varias veces.',
+                'No me resultó cómoda.', 'Prefiero otra alternativa.'];
+
+  var ACCIONES = [
+    { t: 'Beber agua.', i: 'i-agua' },
+    { t: 'Caminar unos pasos.', i: 'i-pasos' },
+    { t: 'Ordenar algunos objetos.', i: 'i-ordenar' },
+    { t: 'Lavarte las manos.', i: 'i-manos' },
+    { t: 'Abrir y organizar un documento.', i: 'i-documento' },
+    { t: 'Elegir otra acción sencilla.', i: 'i-otra', other: true }
+  ];
+
+  var P3_ATT = ['Permaneció principalmente en la acción.', 'Se desplazó algunas veces y regresé.',
+                'Se desplazó constantemente.', 'La experiencia me resultó incómoda.'];
+
+  var SITS = [
+    { quote: '“No puedo concentrarme. Soy pésimo/a para estas cosas.”', ok: 1, opts: [
+      { t: 'Tengo que esforzarme más.',
+        fb: 'A veces, cuando notamos que nos cuesta concentrarnos, pensamos inmediatamente que tenemos que esforzarnos más. Pero aquí todavía no estamos observando qué está ocurriendo con nuestra atención, sino exigiéndonos una respuesta.' },
+      { t: 'Mi atención se está desplazando constantemente.',
+        fb: 'Aquí nos detenemos a mirar qué está ocurriendo: nuestra atención se está desplazando. Observar implica reconocer lo que estamos experimentando, sin convertirlo inmediatamente en un juicio sobre nosotros/as mismos/as.' },
+      { t: 'Necesito dejar de pensar.',
+        fb: 'Cuando nos cuesta concentrarnos, puede aparecer la idea de que tenemos que dejar de pensar para poder continuar. Sin embargo, observar no significa eliminar lo que ocurre, sino reconocer qué está pasando con nuestra atención y nuestros pensamientos.' }
+    ]},
+    { quote: '“Estoy demasiado inquieto/a para hacer mindfulness.”', ok: 1, opts: [
+      { t: 'Mindfulness no funciona.',
+        fb: 'A veces, cuando una estrategia no produce inmediatamente el estado que esperábamos, pensamos que no sirve. Sin embargo, mindfulness no busca eliminar la inquietud, sino permitirnos reconocer lo que está ocurriendo en ese momento.' },
+      { t: 'Estoy notando inquietud y necesidad de movimiento.',
+        fb: 'Aquí podemos detenernos y reconocer lo que está ocurriendo: hay inquietud y aparece una necesidad de movimiento. Observar no significa dejar de sentirla ni permanecer completamente quieto/a, sino notar cómo se presenta la experiencia.' },
+      { t: 'Tengo que obligarme a permanecer quieto/a.',
+        fb: 'Cuando creemos que para estar presentes tenemos que quedarnos quietos, podemos intentar controlar o forzar nuestra experiencia. Pero estar presente no exige inmovilidad; primero podemos observar qué nos está pasando y luego decidir qué necesitamos.' }
+    ]},
+    { quote: '“Me frustré nuevamente.”', ok: 0, opts: [
+      { t: 'Estoy notando frustración en este momento.',
+        fb: 'Aquí nos detenemos a reconocer lo que está ocurriendo: hay frustración presente. No necesitamos cambiarla ni juzgarla de inmediato; primero podemos observar cómo se está manifestando en nosotros.' },
+      { t: 'Tengo que eliminar esta emoción.',
+        fb: 'Cuando aparece una emoción incómoda, puede surgir rápidamente la idea de que tenemos que hacer que desaparezca. Pero observar no significa eliminar lo que sentimos, sino reconocer que esa emoción está presente.' },
+      { t: 'No conseguí autorregularme.',
+        fb: 'A veces, cuando volvemos a sentir una emoción que ya habíamos experimentado, pensamos que estamos fallando en nuestra autorregulación. Aquí pasamos de reconocer la experiencia a evaluarnos. Sentir frustración nuevamente no significa necesariamente que no podamos regularnos.' }
+    ]}
+  ];
+
+  var P5 = ['Algunas estrategias me resultaron más accesibles que otras.', 'Mi experiencia cambió durante la actividad.',
+            'Reconocí algo que antes no había notado.', 'Descubrí una estrategia que podría volver a utilizar.',
+            'Preferiría adaptar alguna de las estrategias.', 'Ninguna me resultó especialmente útil en este momento.', 'Otra.'];
+
+  /* Mensajes finales según puntaje (tono no evaluativo) */
+  function scoreMessage(n) {
+    if (n === 3) return 'Reconociste la observación en las tres situaciones. Distinguir entre describir lo que ocurre y evaluarlo amplía tu espacio de elección.';
+    if (n > 0) return 'Reconociste la observación en ' + n + ' de las 3 situaciones. Cada retroalimentación es una oportunidad para notar la diferencia entre describir lo que ocurre y evaluarlo.';
+    return 'Esta distinción toma práctica, y notarlo ya es parte del proceso. Puedes volver a intentarlo y revisar cada retroalimentación con calma.';
+  }
+
+  /* =========================================================
+     UTILIDADES
+     ========================================================= */
+  function $(s, r) { return (r || document).querySelector(s); }
+  function $$(s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); }
+  function esc(s) {
+    return String(s).replace(/[&<>"']/g, function (c) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+    });
+  }
+  function icon(id) { return '<svg aria-hidden="true" focusable="false"><use href="#' + id + '"/></svg>'; }
+  var liveTimer = null;
+  function announce(msg) {
+    var el = $('#sr-live');
+    el.textContent = '';
+    clearTimeout(liveTimer);
+    liveTimer = setTimeout(function () { el.textContent = msg; }, 80);
+  }
+  function isOther(text) { return /^Otra\.?$/.test(text); }
+
+  /* =========================================================
+     SONIDO · Web Audio API (sin archivos externos)
+     ========================================================= */
+  var Sound = (function () {
+    var ctx = null, on = true, KEY = 'umce-senadis-m4-a1-sound';
+    try { on = localStorage.getItem(KEY) !== 'off'; } catch (e) {}
+    function ac() {
+      var AC = window.AudioContext || window.webkitAudioContext;
+      if (!AC) return null;
+      if (!ctx) ctx = new AC();
+      if (ctx.state === 'suspended') ctx.resume();
+      return ctx;
+    }
+    function tone(freq, start, dur, o) {
+      o = o || {};
+      var c = ac(); if (!c) return;
+      var t = c.currentTime + start;
+      var osc = c.createOscillator(), g = c.createGain();
+      osc.type = o.type || 'sine';
+      osc.frequency.setValueAtTime(freq, t);
+      g.gain.setValueAtTime(0.0001, t);
+      g.gain.exponentialRampToValueAtTime(o.vol || 0.07, t + (o.attack || 0.015));
+      g.gain.exponentialRampToValueAtTime(0.0001, t + dur);
+      osc.connect(g); g.connect(c.destination);
+      osc.start(t); osc.stop(t + dur + 0.05);
+    }
+    var fx = {
+      select:  function () { tone(880, 0, 0.12, { vol: 0.035 }); },
+      next:    function () { tone(587.33, 0, 0.14, { vol: 0.035 }); tone(783.99, 0.07, 0.2, { vol: 0.035 }); },
+      correct: function () { tone(523.25, 0, 0.4, { vol: 0.07 }); tone(659.25, 0.1, 0.4, { vol: 0.07 }); tone(783.99, 0.2, 0.7, { vol: 0.07 }); },
+      gentle:  function () { tone(392, 0, 0.4, { type: 'triangle', vol: 0.06 }); tone(329.63, 0.17, 0.55, { type: 'triangle', vol: 0.06 }); },
+      bell:    function () { tone(528, 0, 2.8, { vol: 0.09, attack: 0.005 }); tone(792, 0, 1.9, { vol: 0.035, attack: 0.005 }); tone(1056, 0, 1.2, { vol: 0.018, attack: 0.005 }); },
+      start:   function () { tone(440, 0, 0.9, { vol: 0.05, attack: 0.02 }); },
+      finish:  function () { [523.25, 659.25, 783.99, 1046.5].forEach(function (f, i) { tone(f, i * 0.12, 0.8, { vol: 0.06 }); }); }
+    };
+    return {
+      play: function (n) { if (!on) return; try { fx[n] && fx[n](); } catch (e) {} },
+      isOn: function () { return on; },
+      set: function (v) { on = v; try { localStorage.setItem(KEY, v ? 'on' : 'off'); } catch (e) {} }
+    };
+  })();
+
+  function syncSoundBtn() {
+    var b = $('#btn-sound'), on = Sound.isOn();
+    b.setAttribute('aria-pressed', on ? 'true' : 'false');
+    $('use', b).setAttribute('href', on ? '#i-sound-on' : '#i-sound-off');
+    $('#sound-state').textContent = on ? 'activado' : 'desactivado';
+  }
+  $('#btn-sound').addEventListener('click', function () {
+    Sound.set(!Sound.isOn()); syncSoundBtn();
+    Sound.play('select');
+    announce(Sound.isOn() ? 'Sonido activado' : 'Sonido desactivado');
+  });
+  syncSoundBtn();
+
+  /* =========================================================
+     TEMPORIZADOR OPCIONAL (accesible: pausable, reiniciable, no bloquea el avance)
+     ========================================================= */
+  var timers = [];
+  function Timer(mount, seconds) {
+    var C = 2 * Math.PI * 52;
+    mount.innerHTML =
+      '<div class="timer" role="timer" aria-label="Temporizador de ' + seconds + ' segundos">' +
+        '<div class="breath" aria-hidden="true"></div>' +
+        '<svg class="ring" viewBox="0 0 120 120" aria-hidden="true" focusable="false"><circle class="track" cx="60" cy="60" r="52"/>' +
+        '<circle class="prog" cx="60" cy="60" r="52" stroke-dasharray="' + C.toFixed(2) + '" stroke-dashoffset="' + C.toFixed(2) + '"/></svg>' +
+        '<div class="readout"><div class="time" aria-hidden="true"></div><div class="state"></div></div>' +
+      '</div>' +
+      '<div class="timer-ctrl">' +
+        '<button type="button" class="btn btn-accent btn-sm" data-t="toggle">' + icon('i-play') + '<span>Iniciar</span></button>' +
+        '<button type="button" class="btn btn-ghost btn-sm" data-t="reset">' + icon('i-reset') + 'Reiniciar</button>' +
+      '</div>' +
+      '<p class="timer-note">El temporizador es opcional. Puedes continuar cuando lo decidas.</p>';
+
+    var box = $('.timer', mount), prog = $('.prog', mount), timeEl = $('.time', mount), stateEl = $('.state', mount);
+    var toggleBtn = $('[data-t="toggle"]', mount), total = seconds * 1000;
+    var elapsed = 0, startAt = 0, iv = null, running = false, done = false;
+
+    function fmt(ms) { var s = Math.ceil(ms / 1000); return Math.floor(s / 60) + ':' + ('0' + (s % 60)).slice(-2); }
+    function paint(e) {
+      var rem = Math.max(0, total - e);
+      timeEl.textContent = fmt(rem);
+      prog.setAttribute('stroke-dashoffset', (C * (1 - Math.min(1, e / total))).toFixed(2));
+      box.setAttribute('aria-label', 'Temporizador: quedan ' + Math.ceil(rem / 1000) + ' segundos');
+    }
+    function setBtn(ico, label) { $('use', toggleBtn).setAttribute('href', '#' + ico); $('span', toggleBtn).textContent = label; }
+    function tick() { var e = elapsed + (Date.now() - startAt); paint(e); if (e >= total) finish(); }
+    function start() {
+      if (done) reset();
+      startAt = Date.now(); running = true;
+      iv = setInterval(tick, 200);
+      box.classList.add('running');
+      stateEl.textContent = 'En práctica…';
+      setBtn('i-pause', 'Pausar');
+      Sound.play('start');
+      announce('Temporizador iniciado: ' + Math.ceil((total - elapsed) / 1000) + ' segundos.');
+    }
+    function pause(silent) {
+      if (!running) return;
+      elapsed += Date.now() - startAt; running = false;
+      clearInterval(iv);
+      box.classList.remove('running');
+      stateEl.textContent = 'En pausa';
+      setBtn('i-play', 'Reanudar');
+      if (!silent) announce('Temporizador en pausa.');
+    }
+    function finish() {
+      clearInterval(iv); running = false; done = true; elapsed = total;
+      paint(total);
+      box.classList.remove('running'); box.classList.add('done');
+      stateEl.textContent = 'Tiempo completado';
+      setBtn('i-reset', 'Repetir');
+      Sound.play('bell');
+      announce('Tiempo completado. Cuando quieras, continúa.');
+    }
+    function reset() {
+      clearInterval(iv); running = false; done = false; elapsed = 0;
+      box.classList.remove('running', 'done');
+      stateEl.textContent = 'Listo para comenzar';
+      setBtn('i-play', 'Iniciar');
+      paint(0);
+    }
+    toggleBtn.addEventListener('click', function () { running ? pause() : start(); });
+    $('[data-t="reset"]', mount).addEventListener('click', function () { reset(); announce('Temporizador reiniciado.'); });
+    reset();
+    var api = { reset: reset, pause: function () { pause(true); } };
+    timers.push(api);
+    return api;
+  }
+
+  var timerP2 = Timer($('#timer-p2'), 30);
+  var timerP3 = Timer($('#timer-p3'), 60);
+
+  /* =========================================================
+     ESTADO
+     ========================================================= */
+  var state;
+  function freshState() {
+    return {
+      p1: [null, null, null, null], p1Other: ['', '', '', ''],
+      ancla: null, anclaOrder: [], anclaExp: {},
+      accion: null, accionOther: '', p3Att: null,
+      p4: SITS.map(function () { return { choice: null, checked: false, correct: false }; }),
+      p5: null, p5Other: ''
+    };
+  }
+  state = freshState();
+
+  /* =========================================================
+     SECUENCIA DE VISTAS (define navegación y progreso)
+     ========================================================= */
+  var VIEWS = [
+    { screen: 'inicio' },
+    { screen: 'p1', step: 'p1-q', q: 0 }, { screen: 'p1', step: 'p1-q', q: 1 },
+    { screen: 'p1', step: 'p1-q', q: 2 }, { screen: 'p1', step: 'p1-q', q: 3 },
+    { screen: 'p1', step: 'p1-fb' },
+    { screen: 'p2', step: 'p2-elegir' }, { screen: 'p2', step: 'p2-practica' }, { screen: 'p2', step: 'p2-reflexion' },
+    { screen: 'p3', step: 'p3-elegir' }, { screen: 'p3', step: 'p3-practica' }, { screen: 'p3', step: 'p3-reflexion' },
+    { screen: 'p4', step: 'p4-sit', s: 0 }, { screen: 'p4', step: 'p4-sit', s: 1 }, { screen: 'p4', step: 'p4-sit', s: 2 },
+    { screen: 'p5', step: 'p5-step' },
+    { screen: 'cierre' },
+    { screen: 'salida' }
+  ];
+  var CIERRE = VIEWS.length - 2;
+  var SCREEN_IDX = { p1: 0, p2: 1, p3: 2, p4: 3, p5: 4 };
+  var SCREEN_NAME = ['Me observo', 'Exploro', 'Practico', 'Reconozco', 'Integremos'];
+  var cur = 0;
+
+  function viewIndex(step) { for (var i = 0; i < VIEWS.length; i++) if (VIEWS[i].step === step) return i; return 0; }
+
+  function updateProgress(v, i) {
+    var nav = $('#progress');
+    nav.hidden = v.screen === 'inicio' || v.screen === 'salida';
+    var pct = Math.round(Math.min(i, CIERRE) / CIERRE * 100);
+    $('#bar-fill').style.width = pct + '%';
+    $('#bar').setAttribute('aria-valuenow', pct);
+    $('#bar').setAttribute('aria-valuetext', pct + '% completado');
+    $('#progress-pct').textContent = pct + '%';
+    var si = v.screen in SCREEN_IDX ? SCREEN_IDX[v.screen] : 5;
+    $('#progress-label').textContent = si === 5
+      ? 'Cierre · Actividad completada'
+      : 'Pantalla ' + (si + 1) + ' de 5 · ' + SCREEN_NAME[si];
+    $$('#steps li').forEach(function (li, k) {
+      li.classList.toggle('done', k < si);
+      li.classList.toggle('current', k === si);
+      if (k === si) li.setAttribute('aria-current', 'step'); else li.removeAttribute('aria-current');
+    });
+  }
+
+  function go(i, opts) {
+    opts = opts || {};
+    if (i < 0 || i >= VIEWS.length) return;
+    var prev = VIEWS[cur], v = VIEWS[i];
+    var screenChanged = opts.initial || prev.screen !== v.screen;
+    cur = i;
+    timers.forEach(function (t) { t.pause(); });
+
+    $$('.screen').forEach(function (s) { s.hidden = s.id !== 'screen-' + v.screen; });
+    var screen = $('#screen-' + v.screen);
+    if (v.step) $$('.step', screen).forEach(function (st) { st.hidden = st.id !== v.step; });
+
+    if (ENTER[v.step || v.screen]) ENTER[v.step || v.screen](v);
+    updateProgress(v, i);
+
+    try { window.scrollTo(0, 0); } catch (e) {}
+    if (!opts.initial) {
+      var target = screenChanged ? $('#t-' + v.screen) : $('[tabindex="-1"]', $('#' + v.step));
+      if (target) setTimeout(function () { try { target.focus({ preventScroll: true }); } catch (e) { target.focus(); } }, 40);
+    }
+  }
+
+  /* =========================================================
+     RENDER DE OPCIONES (radios nativos accesibles)
+     ========================================================= */
+  function optHTML(name, k, text, checked, extra) {
+    extra = extra || {};
+    return '<label class="opt' + (extra.cls ? ' ' + extra.cls : '') + '">' +
+      '<input type="radio" name="' + name + '" value="' + k + '"' + (checked ? ' checked' : '') + '>' +
+      '<span class="opt-body"><span class="radio" aria-hidden="true"></span>' +
+      (extra.ico ? '<span class="opt-ico">' + icon(extra.ico) + '</span>' : '') +
+      (extra.inner || '<span class="opt-text">' + text + '</span>') +
+      (extra.badge || '') + '</span></label>';
+  }
+  function bindRadios(container, fn) {
+    $$('input[type="radio"]', container).forEach(function (r) {
+      r.addEventListener('change', function () { Sound.play('select'); fn(parseInt(r.value, 10)); });
+    });
+  }
+  function setNext(btn, hint, enabled) {
+    btn.disabled = !enabled;
+    if (hint) hint.hidden = enabled;
+  }
+
+  /* =========================================================
+     ENTRADA A CADA VISTA
+     ========================================================= */
+  var ENTER = {};
+
+  /* ---- Pantalla 1 · preguntas ---- */
+  ENTER['p1-q'] = function (v) {
+    var q = v.q, d = P1[q], box = $('#p1-q'), sel = state.p1[q];
+    var showOther = sel !== null && isOther(d.opts[sel]);
+    box.innerHTML =
+      '<span class="q-count">Pregunta ' + (q + 1) + ' de ' + P1.length + '</span>' +
+      '<fieldset><legend id="t-p1q" tabindex="-1">' + d.q + '</legend>' +
+      '<div class="options">' + d.opts.map(function (o, k) { return optHTML('p1q' + q, k, o, sel === k); }).join('') + '</div>' +
+      '<div class="other-wrap"' + (showOther ? '' : ' hidden') + '>' +
+        '<label class="field-label" for="p1-other">Escribe cuál (opcional)</label>' +
+        '<input class="text-input" id="p1-other" type="text" maxlength="120" autocomplete="off" value="' + esc(state.p1Other[q]) + '">' +
+      '</div></fieldset>' +
+      '<div class="btn-row between">' +
+        '<button type="button" class="btn btn-ghost" data-prev>' + icon('i-left') + 'Anterior</button>' +
+        '<button type="button" class="btn btn-primary" data-next aria-describedby="p1-hint">' + (q < 3 ? 'Siguiente' : 'Continuar') + ' ' + icon('i-right') + '</button>' +
+      '</div><p class="hint" id="p1-hint">Selecciona una opción para continuar.</p>';
+    var next = $('[data-next]', box), hint = $('#p1-hint'), wrap = $('.other-wrap', box);
+    setNext(next, hint, sel !== null);
+    bindRadios(box, function (k) {
+      state.p1[q] = k;
+      wrap.hidden = !isOther(d.opts[k]);
+      setNext(next, hint, true);
+    });
+    $('#p1-other').addEventListener('input', function (e) { state.p1Other[q] = e.target.value; });
+  };
+
+  function p1Answer(q) {
+    var k = state.p1[q]; if (k === null) return '—';
+    var t = P1[q].opts[k];
+    return isOther(t) && state.p1Other[q].trim() ? 'Otra: ' + state.p1Other[q].trim() : t;
+  }
+
+  ENTER['p1-fb'] = function () {
+    $('#p1-summary').innerHTML = P1.map(function (d, q) {
+      return '<span class="chip"><b>' + d.key + ':</b> ' + esc(p1Answer(q)) + '</span>';
+    }).join('');
+  };
+
+  /* ---- Pantalla 2 · anclas ---- */
+  ENTER['p2-elegir'] = function () {
+    var box = $('#p2-options');
+    box.innerHTML = ANCLAS.map(function (a, k) {
+      var tried = state.anclaOrder.indexOf(k) > -1;
+      return optHTML('ancla', k, a.t, state.ancla === k, {
+        cls: 'anchor-row', ico: a.i,
+        inner: '<span class="opt-title">' + a.t + '</span><span class="opt-desc">' + a.d + '</span>',
+        badge: tried ? '<span class="tried">✓ Explorada</span>' : ''
+      });
+    }).join('');
+    setNext($('#p2-go'), $('#p2-hint'), state.ancla !== null);
+    bindRadios(box, function (k) { state.ancla = k; setNext($('#p2-go'), $('#p2-hint'), true); });
+  };
+  $('#p2-go').addEventListener('click', function () { Sound.play('next'); go(cur + 1); });
+
+  ENTER['p2-practica'] = function () {
+    var a = ANCLAS[state.ancla];
+    $('#p2-f-ico').setAttribute('href', '#' + a.i);
+    $('#t-p2b').textContent = a.t;
+    $('#p2-f-desc').textContent = a.d;
+    if (state.anclaOrder.indexOf(state.ancla) === -1) state.anclaOrder.push(state.ancla);
+    timerP2.reset();
+  };
+
+  function p2Idea(k) {
+    var idea = $('#p2-idea');
+    var wasHidden = idea.hidden;
+    idea.hidden = false;
+    $('#p2-idea-2').classList.toggle('hl', k >= 3);
+    if (wasHidden) announce('Idea importante. ' + $('#p2-idea-1').textContent + ' ' + $('#p2-idea-2').textContent);
+  }
+  ENTER['p2-reflexion'] = function () {
+    var box = $('#p2-exp'), sel = state.anclaExp[state.ancla];
+    sel = sel === undefined ? null : sel;
+    box.innerHTML = P2_EXP.map(function (o, k) { return optHTML('p2exp', k, o, sel === k); }).join('');
+    $('#p2-idea').hidden = true;
+    if (sel !== null) p2Idea(sel);
+    $('#p2-cont').disabled = sel === null;
+    bindRadios(box, function (k) { state.anclaExp[state.ancla] = k; p2Idea(k); $('#p2-cont').disabled = false; });
+  };
+  $('#p2-otra').addEventListener('click', function () {
+    state.ancla = null;
+    Sound.play('select');
+    go(viewIndex('p2-elegir'));
+    announce('Elige otra ancla para explorar.');
+  });
+  $('#p2-cont').addEventListener('click', function () { Sound.play('next'); go(cur + 1); });
+
+  /* ---- Pantalla 3 · una cosa a la vez ---- */
+  function p3Label() {
+    var a = ACCIONES[state.accion];
+    return a.other ? (state.accionOther.trim() || a.t) : a.t;
+  }
+  ENTER['p3-elegir'] = function () {
+    var box = $('#p3-options');
+    box.innerHTML = ACCIONES.map(function (a, k) {
+      return optHTML('accion', k, a.t, state.accion === k, { ico: a.i });
+    }).join('');
+    $('#p3-other').value = state.accionOther;
+    $('#p3-other-wrap').hidden = !(state.accion !== null && ACCIONES[state.accion].other);
+    setNext($('#p3-go'), $('#p3-hint'), state.accion !== null);
+    bindRadios(box, function (k) {
+      state.accion = k;
+      $('#p3-other-wrap').hidden = !ACCIONES[k].other;
+      setNext($('#p3-go'), $('#p3-hint'), true);
+    });
+  };
+  $('#p3-other').addEventListener('input', function (e) { state.accionOther = e.target.value; });
+  $('#p3-go').addEventListener('click', function () { Sound.play('next'); go(cur + 1); });
+
+  ENTER['p3-practica'] = function () {
+    $('#p3-f-ico').setAttribute('href', '#' + ACCIONES[state.accion].i);
+    $('#t-p3b').textContent = p3Label();
+    timerP3.reset();
+  };
+
+  ENTER['p3-reflexion'] = function () {
+    var box = $('#p3-att'), sel = state.p3Att;
+    box.innerHTML = P3_ATT.map(function (o, k) { return optHTML('p3att', k, o, sel === k); }).join('');
+    $('#p3-idea').hidden = sel === null;
+    $('#p3-cont').disabled = sel === null;
+    bindRadios(box, function (k) {
+      var first = state.p3Att === null;
+      state.p3Att = k;
+      $('#p3-idea').hidden = false;
+      $('#p3-cont').disabled = false;
+      if (first) announce('Para recordar. El propósito no es conseguir una concentración perfecta. La práctica consiste en: notar, reconocer, regresar.');
+    });
+  };
+  $('#p3-cont').addEventListener('click', function () { Sound.play('next'); go(cur + 1); });
+
+  /* ---- Pantalla 4 · observar sin juzgar ---- */
+  var L = ['A', 'B', 'C'];
+  function renderSit(s, focusFeedback) {
+    var d = SITS[s], st = state.p4[s], box = $('#p4-sit'), last = s === SITS.length - 1;
+    var opts = d.opts.map(function (o, k) {
+      var cls = '', mark = '';
+      if (st.checked) {
+        if (k === d.ok) { cls = 'correct'; mark = '<span class="mark">✓ Observación</span>'; }
+        else if (k === st.choice) { cls = 'wrong'; mark = '<span class="mark">Tu respuesta</span>'; }
+      }
+      return '<label class="opt ' + cls + '"><input type="radio" name="p4s' + s + '" value="' + k + '"' +
+        (st.choice === k ? ' checked' : '') + (st.checked ? ' disabled' : '') + '>' +
+        '<span class="opt-body"><span class="letter" aria-hidden="true">' + L[k] + '</span>' +
+        '<span class="opt-text"><span class="sr-only">Alternativa ' + L[k] + ': </span>' + o.t + '</span>' + mark + '</span></label>';
+    }).join('');
+
+    var fb = '';
+    if (st.checked) {
+      var ch = d.opts[st.choice], okO = d.opts[d.ok];
+      fb += '<div class="callout ' + (st.correct ? 'ok' : 'warn') + '">' +
+        '<span class="status">' + (st.correct ? 'Representa una observación' : 'No representa una observación') + '</span>' +
+        '<h4 id="p4-fb-h" tabindex="-1">' + (st.correct ? '✅ ' : '') + 'Retroalimentación · Alternativa ' + L[st.choice] + '</h4>' +
+        '<p>' + ch.fb + '</p></div>';
+      if (!st.correct) {
+        fb += '<div class="callout ok"><span class="status">Representa una observación</span>' +
+          '<h4>✅ Alternativa ' + L[d.ok] + '. ' + okO.t + '</h4><p>' + okO.fb + '</p></div>';
+      }
+      var rest = d.opts.map(function (o, k) { return { o: o, k: k }; })
+        .filter(function (x) { return x.k !== st.choice && x.k !== d.ok; });
+      if (rest.length) {
+        fb += '<details class="more"><summary>Revisar las demás alternativas</summary><div class="inner">' +
+          rest.map(function (x) { return '<div class="fb-item"><b>Alternativa ' + L[x.k] + '. ' + x.o.t + '</b>' + x.o.fb + '</div>'; }).join('') +
+          '</div></details>';
+      }
+    }
+
+    box.innerHTML =
+      '<span class="q-count">Situación ' + (s + 1) + ' de ' + SITS.length + '</span>' +
+      '<h3 id="t-p4s" tabindex="-1">Situación ' + (s + 1) + '</h3>' +
+      '<blockquote class="quote">' + icon('i-quote') + '<p>' + d.quote + '</p></blockquote>' +
+      '<fieldset><legend class="sr-only">Selecciona la alternativa que representa mejor una observación</legend>' +
+      '<div class="options list">' + opts + '</div></fieldset>' +
+      '<div id="p4-fb" aria-live="off">' + fb + '</div>' +
+      '<div class="btn-row between">' +
+        '<button type="button" class="btn btn-ghost" data-prev>' + icon('i-left') + 'Anterior</button>' +
+        (st.checked
+          ? '<button type="button" class="btn btn-primary" data-next>' + (last ? 'Continuar' : 'Siguiente situación') + ' ' + icon('i-right') + '</button>'
+          : '<button type="button" class="btn btn-accent" id="p4-check" aria-describedby="p4-hint"' + (st.choice === null ? ' disabled' : '') + '>' + icon('i-check') + 'Comprobar respuesta</button>') +
+      '</div>' +
+      (st.checked ? '' : '<p class="hint" id="p4-hint"' + (st.choice === null ? '' : ' hidden') + '>Selecciona una alternativa y luego comprueba tu respuesta.</p>');
+
+    if (!st.checked) {
+      bindRadios(box, function (k) { st.choice = k; $('#p4-check').disabled = false; $('#p4-hint').hidden = true; });
+      $('#p4-check').addEventListener('click', function () {
+        st.checked = true;
+        st.correct = st.choice === d.ok;
+        Sound.play(st.correct ? 'correct' : 'gentle');
+        renderSit(s, true);
+      });
+    }
+    if (focusFeedback) {
+      var h = $('#p4-fb-h');
+      announce((st.correct ? 'Representa una observación. ' : 'No representa una observación. ') + d.opts[st.choice].fb);
+      if (h) setTimeout(function () { try { h.focus({ preventScroll: false }); } catch (e) { h.focus(); } }, 40);
+    }
+  }
+  ENTER['p4-sit'] = function (v) { renderSit(v.s, false); };
+
+  /* ---- Pantalla 5 · integrar ---- */
+  ENTER['p5-step'] = function () {
+    var box = $('#p5-options');
+    box.innerHTML = P5.map(function (o, k) { return optHTML('p5', k, o, state.p5 === k); }).join('');
+    $('#p5-other').value = state.p5Other;
+    $('#p5-other-wrap').hidden = !(state.p5 !== null && isOther(P5[state.p5]));
+    $('#p5-fin').disabled = state.p5 === null;
+    bindRadios(box, function (k) {
+      state.p5 = k;
+      $('#p5-other-wrap').hidden = !isOther(P5[k]);
+      $('#p5-fin').disabled = false;
+    });
+  };
+  $('#p5-other').addEventListener('input', function (e) { state.p5Other = e.target.value; });
+  $('#p5-fin').addEventListener('click', function () { Sound.play('finish'); go(cur + 1); });
+
+  /* ---- Cierre ---- */
+  ENTER['cierre'] = function () {
+    var score = state.p4.filter(function (x) { return x.correct; }).length;
+    var C = 376.99;
+    $('#score-num').textContent = score;
+    $('#score-text').textContent = score + ' de 3';
+    $('#kpi-obs').textContent = score + ' de 3';
+    $('#kpi-anclas').textContent = state.anclaOrder.length;
+    $('#score-msg').textContent = scoreMessage(score);
+    var ring = $('#score-prog');
+    ring.setAttribute('stroke-dashoffset', C);
+    setTimeout(function () { ring.setAttribute('stroke-dashoffset', (C * (1 - score / 3)).toFixed(2)); }, 120);
+
+    var anclas = state.anclaOrder.map(function (k) {
+      var e = state.anclaExp[k];
+      return ANCLAS[k].t + (e !== undefined ? ' — ' + P2_EXP[e] : '');
+    });
+    var p5 = state.p5 === null ? '—'
+      : (isOther(P5[state.p5]) && state.p5Other.trim() ? 'Otra: ' + state.p5Other.trim() : P5[state.p5]);
+    var rows = P1.map(function (d, q) { return [d.key, p1Answer(q)]; }).concat([
+      [anclas.length > 1 ? 'Anclas exploradas' : 'Ancla explorada', anclas.join(' · ') || '—'],
+      ['Acción cotidiana', state.accion === null ? '—' : p3Label()],
+      ['Mi atención en la acción', state.p3Att === null ? '—' : P3_ATT[state.p3Att]],
+      ['Lo que descubrí', p5]
+    ]);
+    $('#recap').innerHTML = rows.map(function (r) {
+      return '<div><dt>' + esc(r[0]) + '</dt><dd>' + esc(r[1]) + '</dd></div>';
+    }).join('');
+    announce('Actividad completada. Puntaje obtenido: ' + score + ' de 3.');
+  };
+
+  /* =========================================================
+     EVENTOS GLOBALES
+     ========================================================= */
+  $('#btn-start').addEventListener('click', function () { Sound.play('next'); go(1); });
+
+  $('#app').addEventListener('click', function (e) {
+    var b = e.target.closest('[data-next],[data-prev],[data-goto]');
+    if (!b || b.disabled) return;
+    if (b.hasAttribute('data-next')) { Sound.play('next'); go(cur + 1); }
+    else if (b.hasAttribute('data-prev')) { Sound.play('select'); go(cur - 1); }
+    else if (b.hasAttribute('data-goto')) { Sound.play('select'); go(viewIndex(b.getAttribute('data-goto'))); }
+  });
+
+  $('#btn-descargar').addEventListener('click', function () { Sound.play('correct'); });
+
+  function restart() {
+    state = freshState();
+    $('#p3-other').value = ''; $('#p5-other').value = '';
+    timers.forEach(function (t) { t.reset(); });
+    Sound.play('select');
+    go(0);
+    announce('Actividad reiniciada.');
+  }
+  $('#btn-retry').addEventListener('click', restart);
+  $('#btn-restart').addEventListener('click', restart);
+  $('#btn-exit').addEventListener('click', function () { Sound.play('next'); go(VIEWS.length - 1); });
+
+  go(0, { initial: true });
+})();
+</script>
+</body>
+</html>
